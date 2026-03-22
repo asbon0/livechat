@@ -461,6 +461,12 @@
                 padding: 6px 15px;
                 font-size: 12px;
             }
+
+            .model-image video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
     </style>
 </head>
@@ -594,24 +600,24 @@
         
         // Daftar model untuk ditampilkan
         const models = [
-            { name: "LadyLenal", live: true, hd: true, viewers: "2.3k" },
-            { name: "Belle", live: true, hd: true, viewers: "1.8k" },
-            { name: "LittleMissEve", live: true, hd: false, viewers: "987" },
-            { name: "Tiny-Mimi", live: true, hd: true, viewers: "3.1k" },
-            { name: "comiesweetz", live: true, hd: false, viewers: "456" },
-            { name: "Kiki_hammyy", live: true, hd: true, viewers: "1.2k" },
-            { name: "DirtytalkKaylaa", live: true, hd: false, viewers: "789" },
-            { name: "Paige_Turner", live: true, hd: true, viewers: "2.1k" },
-            { name: "thebrattygoddess", live: true, hd: false, viewers: "567" },
-            { name: "MiraKIsss", live: true, hd: true, viewers: "1.5k" },
-            { name: "thewillownest_", live: true, hd: false, viewers: "345" },
-            { name: "CelestialRuby", live: true, hd: true, viewers: "2.9k" },
-            { name: "Hahaha_ha2", live: true, hd: false, viewers: "234" },
-            { name: "kittyy25", live: true, hd: true, viewers: "1.1k" },
-            { name: "Lilevame", live: true, hd: false, viewers: "678" },
-            { name: "Tella_dream", live: true, hd: true, viewers: "892" },
-            { name: "NiceHotJob", live: true, hd: false, viewers: "432" },
-            { name: "Nessa", live: true, hd: true, viewers: "2.7k" }
+            { name: "LadyLenal", video: "https://cdn2.videy.co/ReFZITDJ1.mp4",live: true, hd: true, viewers: "2.3k" },
+            { name: "Belle", video: "https://cdn2.videy.co/VUQ3U8JN1.mp4",live: true, hd: true, viewers: "1.8k" },
+            { name: "LittleMissEve", video: "https://cdn2.videy.co/nlu6VKBo1.mp4",live: true, hd: true, viewers: "987" },
+            { name: "Tiny-Mimi", video: "https://cdn2.videy.co/6pQQdh2W1.mp4",live: true, hd: true, viewers: "3.1k" },
+            { name: "comiesweetz", video: "https://cdn2.videy.co/T1icBAeJ1.mp4",live: true, hd: true, viewers: "456" },
+            { name: "Kiki_hammyy", video: "https://cdn2.videy.co/gwgD0A4m1.mp4",live: true, hd: true, viewers: "1.2k" },
+            { name: "DirtytalkKaylaa", video: "https://cdn2.videy.co/d2BWselV1.mp4",live: true, hd: true, viewers: "789" },
+            { name: "Paige_Turner", video: "https://cdn2.videy.co/0AuQl99b1.mp4",live: true, hd: true, viewers: "2.1k" },
+            { name: "thebrattygoddess", video: "https://cdn2.videy.co/UOHQRDKV1.mp4",live: true, hd: true, viewers: "567" },
+            { name: "MiraKIsss", video: "https://cdn2.videy.co/YLhGaRWo1.mp4",live: true, hd: true, viewers: "1.5k" },
+            { name: "thewillownest_", video: "https://cdn2.videy.co/FT4TYM0b1.mp4",live: true, hd: true, viewers: "345" },
+            { name: "CelestialRuby", video: "https://cdn2.videy.co/jeaZoPWP1.mp4",live: true, hd: true, viewers: "2.9k" },
+            { name: "Hahaha_ha2", video: "https://cdn2.videy.co/NY4sixWS1.mp4",live: true, hd: true, viewers: "234" },
+            { name: "kittyy25", video: "https://cdn2.videy.co/MhovuxiH1.mp4",live: true, hd: true, viewers: "1.1k" },
+            { name: "Lilevame", video: "https://cdn2.videy.co/cOwsWiWE1.mp4",live: true, hd: true, viewers: "678" },
+            { name: "Tella_dream", video: "https://cdn2.videy.co/T6eoqa3X1.mp4",live: true, hd: true, viewers: "892" },
+            { name: "NiceHotJob", video: "https://cdn2.videy.co/jqQHzQaq1.mp4",live: true, hd: true, viewers: "432" },
+            { name: "Nessa", video: "https://cdn2.videy.co/q5tS65ey1.mp4",live: true, hd: true, viewers: "2.7k" }
         ];
 
         // Fungsi untuk render model cards
@@ -628,7 +634,14 @@
                     <div class="model-image">
                         ${model.live ? '<span class="live-tag">LIVE</span>' : ''}
                         ${model.hd ? '<span class="hd-tag">HD</span>' : ''}
-                        <img src="https://placehold.co/300x300/2c2c3a/ff4757?text=${model.name.charAt(0)}" alt="${model.name}">
+                        <video 
+                            src="${model.video}" 
+                            autoplay 
+                            muted 
+                            loop 
+                            playsinline
+                            preload="metadata"
+                        ></video>
                     </div>
                     <div class="model-info">
                         <div class="model-name">${model.name}</div>
