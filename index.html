@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Live Cams - Adult Entertainment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .live-badge {
+            background: #ff4757;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Search Bar */
+        .search-section {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #1f1f2f;
+            border-radius: 50px;
+            padding: 8px 20px;
+            border: 1px solid #333;
+        }
+
+        .search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 0;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: #666;
+        }
+
+        .search-icon {
+            color: #888;
+            margin-right: 10px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,71,87,0.4);
+        }
+
+        .btn-secondary {
+            background: #2c2c3a;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #3c3c4a;
+        }
+
+        /* Age Verification Banner */
+        .age-verify {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #2c2c3a, #1f1f2f);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            border: 1px solid #ff4757;
+        }
+
+        .age-verify-text h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .age-verify-text p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .age-verify-btn {
+            background: #ff4757;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .age-verify-btn:hover {
+            background: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        /* Categories */
+        .categories {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .categories-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        .categories-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .category-item {
+            background: #1f1f2f;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #333;
+        }
+
+        .category-item:hover {
+            background: #ff4757;
+            border-color: #ff4757;
+        }
+
+        /* Models Grid */
+        .models-section {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .section-link {
+            color: #ff4757;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .model-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #2c2c2c;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-color: #ff4757;
+        }
+
+        .model-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(135deg, #2c2c3a, #1f1f2f);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .live-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff4757;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .hd-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+
+        .model-info {
+            padding: 12px;
+        }
+
+        .model-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .model-stats {
+            display: flex;
+            gap: 10px;
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* Specials Section */
+        .specials-section {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .specials-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .special-item {
+            background: linear-gradient(135deg, #2c2c3a, #1f1f2f);
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #ff4757;
+        }
+
+        .special-item:hover {
+            background: #ff4757;
+            transform: scale(1.05);
+        }
+
+        /* Footer Survey */
+        .survey-section {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 25px;
+            background: linear-gradient(135deg, #1f1f2f, #2c2c3a);
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px dashed #ff4757;
+        }
+
+        .survey-section:hover {
+            background: linear-gradient(135deg, #2c2c3a, #3c3c4a);
+        }
+
+        .survey-section p {
+            color: #ff4757;
+            font-weight: bold;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: #0f0f17;
+            z-index: 1000;
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+        }
+
+        .sidebar-nav.open {
+            width: 280px;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-close {
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .sidebar-menu {
+            padding: 20px;
+        }
+
+        .sidebar-menu-item {
+            padding: 12px 0;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s;
+            border-bottom: 1px solid #222;
+        }
+
+        .sidebar-menu-item:hover {
+            color: #ff4757;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* Menu Icon */
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .models-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+            
+            .age-verify {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .btn {
+                padding: 10px 18px;
+            }
+            
+            .category-item {
+                padding: 6px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-nav" id="sidebar">
+        <div class="sidebar-header">
+            <span style="font-weight: bold; color: #ff4757;">MENU</span>
+            <span class="sidebar-close" id="closeSidebar">&times;</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="sidebar-menu-item" data-link="home">🏠 Home</div>
+            <div class="sidebar-menu-item" data-link="recommended">⭐ Recommended</div>
+            <div class="sidebar-menu-item" data-link="favorites">❤️ My Favorites</div>
+            <div class="sidebar-menu-item" data-link="private">🔒 Best for Privates</div>
+            <div class="sidebar-menu-item" data-link="collection">📁 My Collection</div>
+            <div class="sidebar-menu-item" data-link="history">🕐 Watch History</div>
+            <div class="sidebar-menu-item" data-link="specials">✨ SPECIALS</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span class="menu-icon" id="menuIcon">☰</span>
+                <div class="logo">
+                    <span class="logo-icon">🔥</span>
+                    <span class="logo-text">LIVECAMS</span>
+                </div>
+                <span class="live-badge">9015 LIVE</span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <span class="live-badge" style="background: #4ecdc4;">Top Models</span>
+                <span class="live-badge" style="background: #ffa502;">Add Tokens</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-section">
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Find anything you want" id="searchInput">
+            <span style="color: #ff4757;">MagicSearch</span>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="btn btn-primary" id="addTokensBtn">💰 Add Tokens</button>
+        <button class="btn btn-secondary" id="verifyAgeBtn">🔞 Verify Age</button>
+    </div>
+
+    <!-- Age Verification Banner -->
+    <div class="age-verify" id="ageVerifyBanner">
+        <div class="age-verify-text">
+            <h3>🔞 Verify your age to unlock 18+ content</h3>
+            <p>Required by state law. It's fast and we don't store personal data.</p>
+        </div>
+        <div class="age-verify-btn" id="verifyAgeBannerBtn">Verify Age</div>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories">
+        <div class="categories-title">POPULAR CATEGORIES</div>
+        <div class="categories-grid" id="categoriesGrid">
+            <span class="category-item">American (134)</span>
+            <span class="category-item">Ukrainian (142)</span>
+            <span class="category-item">New Models (1103)</span>
+            <span class="category-item">VRCams (158)</span>
+            <span class="category-item">BDSM (70)</span>
+            <span class="category-item">Teen 18+ (1326)</span>
+            <span class="category-item">Young 22+ (3326)</span>
+            <span class="category-item">MILF (1275)</span>
+            <span class="category-item">Mature (238)</span>
+            <span class="category-item">Granny (58)</span>
+        </div>
+    </div>
+
+    <!-- Featured Models -->
+    <div class="models-section">
+        <div class="section-header">
+            <span class="section-title">🔥 Featured Models</span>
+            <span class="section-link" id="seeAllModels">See All →</span>
+        </div>
+        <div class="models-grid" id="featuredModels">
+            <!-- Models will be populated by JS -->
+        </div>
+    </div>
+
+    <!-- Specials Section -->
+    <div class="specials-section">
+        <div class="section-header">
+            <span class="section-title">✨ SPECIALS</span>
+            <span class="section-link">View All →</span>
+        </div>
+        <div class="specials-grid" id="specialsGrid">
+            <div class="special-item">💎 Ticket Shows (187)</div>
+            <div class="special-item">🎭 Top Free Live Sex Cams</div>
+            <div class="special-item">🔥 Exclusive Content</div>
+            <div class="special-item">⭐ VIP Access</div>
+        </div>
+    </div>
+
+    <!-- More Models -->
+    <div class="models-section">
+        <div class="section-header">
+            <span class="section-title">🎬 Live Now</span>
+            <span class="section-link">Refresh →</span>
+        </div>
+        <div class="models-grid" id="liveModels">
+            <!-- More models will be populated by JS -->
+        </div>
+    </div>
+
+    <!-- Survey Section -->
+    <div class="survey-section" id="surveyBtn">
+        <p>📝 Share your anonymous feedback in a quick survey!</p>
+        <p style="font-size: 12px; color: #888; margin-top: 8px;">Click Here</p>
+    </div>
+
+    <script>
+        // =============== KONFIGURASI ===============
+        // GANTI DENGAN DIRECTLINK ADSTERRA ANDA
+        const ADSTERRA_DIRECTLINK = "https://oversightexcitement.com/ecpp2d2yf?key=780644cc073355ffdcb57a8c6dbbd9b4";
+        
+        // Daftar model untuk ditampilkan
+        const models = [
+            { name: "LadyLenal", live: true, hd: true, viewers: "2.3k" },
+            { name: "Belle", live: true, hd: true, viewers: "1.8k" },
+            { name: "LittleMissEve", live: true, hd: false, viewers: "987" },
+            { name: "Tiny-Mimi", live: true, hd: true, viewers: "3.1k" },
+            { name: "comiesweetz", live: true, hd: false, viewers: "456" },
+            { name: "Kiki_hammyy", live: true, hd: true, viewers: "1.2k" },
+            { name: "DirtytalkKaylaa", live: true, hd: false, viewers: "789" },
+            { name: "Paige_Turner", live: true, hd: true, viewers: "2.1k" },
+            { name: "thebrattygoddess", live: true, hd: false, viewers: "567" },
+            { name: "MiraKIsss", live: true, hd: true, viewers: "1.5k" },
+            { name: "thewillownest_", live: true, hd: false, viewers: "345" },
+            { name: "CelestialRuby", live: true, hd: true, viewers: "2.9k" },
+            { name: "Hahaha_ha2", live: true, hd: false, viewers: "234" },
+            { name: "kittyy25", live: true, hd: true, viewers: "1.1k" },
+            { name: "Lilevame", live: true, hd: false, viewers: "678" },
+            { name: "Tella_dream", live: true, hd: true, viewers: "892" },
+            { name: "NiceHotJob", live: true, hd: false, viewers: "432" },
+            { name: "Nessa", live: true, hd: true, viewers: "2.7k" }
+        ];
+
+        // Fungsi untuk render model cards
+        function renderModels(modelsArray, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            modelsArray.forEach(model => {
+                const card = document.createElement('div');
+                card.className = 'model-card';
+                card.setAttribute('data-model', model.name);
+                card.innerHTML = `
+                    <div class="model-image">
+                        ${model.live ? '<span class="live-tag">LIVE</span>' : ''}
+                        ${model.hd ? '<span class="hd-tag">HD</span>' : ''}
+                        <img src="https://placehold.co/300x300/2c2c3a/ff4757?text=${model.name.charAt(0)}" alt="${model.name}">
+                    </div>
+                    <div class="model-info">
+                        <div class="model-name">${model.name}</div>
+                        <div class="model-stats">
+                            <span>👁️ ${model.viewers}</span>
+                            <span>💬 ${Math.floor(Math.random() * 200)}</span>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => redirectToAdsterra());
+                container.appendChild(card);
+            });
+        }
+
+        // Fungsi redirect ke Adsterra dengan tracking
+        function redirectToAdsterra(source = 'organic') {
+            // Bersihkan referrer
+            Object.defineProperty(document, 'referrer', { get: function() { return ''; } });
+            
+            // Buat URL dengan parameter tracking
+            const url = ADSTERRA_DIRECTLINK.includes('?') 
+                ? `${ADSTERRA_DIRECTLINK}&source=${source}&landing=livecams&ts=${Date.now()}`
+                : `${ADSTERRA_DIRECTLINK}?source=${source}&landing=livecams&ts=${Date.now()}`;
+            
+            window.location.href = url;
+        }
+
+        // Age verification popup
+        function showAgeVerification() {
+            if (confirm("🔞 AGE VERIFICATION\n\nAre you 18 years or older?\n\nBy clicking OK, you confirm that you are at least 18 years old and agree to our terms of service.")) {
+                localStorage.setItem('age_verified', 'true');
+                alert("✓ Age verified! You now have access to all content.");
+                return true;
+            }
+            return false;
+        }
+
+        // Check if age already verified
+        function checkAgeVerification() {
+            if (localStorage.getItem('age_verified') === 'true') {
+                const banner = document.getElementById('ageVerifyBanner');
+                if (banner) banner.style.display = 'none';
+                return true;
+            }
+            return false;
+        }
+
+        // Sidebar functions
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('overlay').classList.add('show');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        redirectToAdsterra('search');
+                    }
+                });
+            }
+        }
+
+        // Setup all click handlers for monetization
+        function setupMonetizationHandlers() {
+            // All category items
+            document.querySelectorAll('.category-item').forEach(el => {
+                el.addEventListener('click', () => redirectToAdsterra('category'));
+            });
+            
+            // All special items
+            document.querySelectorAll('.special-item').forEach(el => {
+                el.addEventListener('click', () => redirectToAdsterra('special'));
+            });
+            
+            // Section links
+            const sectionLinks = document.querySelectorAll('.section-link');
+            sectionLinks.forEach(el => {
+                el.addEventListener('click', () => redirectToAdsterra('section_link'));
+            });
+            
+            // Add tokens button
+            const addTokensBtn = document.getElementById('addTokensBtn');
+            if (addTokensBtn) {
+                addTokensBtn.addEventListener('click', () => redirectToAdsterra('add_tokens'));
+            }
+            
+            // Survey button
+            const surveyBtn = document.getElementById('surveyBtn');
+            if (surveyBtn) {
+                surveyBtn.addEventListener('click', () => redirectToAdsterra('survey'));
+            }
+            
+            // See all models
+            const seeAllModels = document.getElementById('seeAllModels');
+            if (seeAllModels) {
+                seeAllModels.addEventListener('click', () => redirectToAdsterra('see_all'));
+            }
+            
+            // Sidebar menu items
+            document.querySelectorAll('.sidebar-menu-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    closeSidebar();
+                    redirectToAdsterra('sidebar');
+                });
+            });
+        }
+
+        // Setup age verification handlers
+        function setupAgeVerificationHandlers() {
+            const verifyBtn = document.getElementById('verifyAgeBtn');
+            const verifyBannerBtn = document.getElementById('verifyAgeBannerBtn');
+            
+            if (verifyBtn) {
+                verifyBtn.addEventListener('click', () => {
+                    if (showAgeVerification()) {
+                        document.getElementById('ageVerifyBanner').style.display = 'none';
+                    }
+                });
+            }
+            
+            if (verifyBannerBtn) {
+                verifyBannerBtn.addEventListener('click', () => {
+                    if (showAgeVerification()) {
+                        document.getElementById('ageVerifyBanner').style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Setup redirect on page load (optional)
+        let redirectTimeout = null;
+        function setupAutoRedirect() {
+            // Optional: Auto redirect after 10 seconds of inactivity
+            // Uncomment if you want this feature
+            /*
+            redirectTimeout = setTimeout(() => {
+                if (!localStorage.getItem('redirected')) {
+                    localStorage.setItem('redirected', 'true');
+                    redirectToAdsterra('auto_redirect');
+                }
+            }, 10000);
+            */
+        }
+
+        // Initialize page
+        function init() {
+            // Render models
+            renderModels(models.slice(0, 8), 'featuredModels');
+            renderModels(models.slice(8, 18), 'liveModels');
+            
+            // Check age verification
+            checkAgeVerification();
+            
+            // Setup handlers
+            setupSearch();
+            setupMonetizationHandlers();
+            setupAgeVerificationHandlers();
+            setupAutoRedirect();
+            
+            // Sidebar handlers
+            document.getElementById('menuIcon').addEventListener('click', openSidebar);
+            document.getElementById('closeSidebar').addEventListener('click', closeSidebar);
+            document.getElementById('overlay').addEventListener('click', closeSidebar);
+        }
+
+        // Start when page loads
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
