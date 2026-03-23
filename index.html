@@ -594,230 +594,185 @@
     </div>
 
     <script>
-        // =============== KONFIGURASI ===============
-        // GANTI DENGAN DIRECTLINK ADSTERRA ANDA
-        const ADSTERRA_DIRECTLINK = "https://oversightexcitement.com/ecpp2d2yf?key=780644cc073355ffdcb57a8c6dbbd9b4";
-        
-        // Daftar model untuk ditampilkan
-        const models = [
-            { name: "LadyLenal", video: "https://cdn2.videy.co/ReFZITDJ1.mp4",live: true, hd: true, viewers: "2.3k" },
-            { name: "Belle", video: "https://cdn2.videy.co/VUQ3U8JN1.mp4",live: true, hd: true, viewers: "1.8k" },
-            { name: "LittleMissEve", video: "https://cdn2.videy.co/nlu6VKBo1.mp4",live: true, hd: true, viewers: "987" },
-            { name: "Tiny-Mimi", video: "https://cdn2.videy.co/6pQQdh2W1.mp4",live: true, hd: true, viewers: "3.1k" },
-            { name: "comiesweetz", video: "https://cdn2.videy.co/T1icBAeJ1.mp4",live: true, hd: true, viewers: "456" },
-            { name: "Kiki_hammyy", video: "https://cdn2.videy.co/gwgD0A4m1.mp4",live: true, hd: true, viewers: "1.2k" },
-            { name: "DirtytalkKaylaa", video: "https://cdn2.videy.co/d2BWselV1.mp4",live: true, hd: true, viewers: "789" },
-            { name: "Paige_Turner", video: "https://cdn2.videy.co/0AuQl99b1.mp4",live: true, hd: true, viewers: "2.1k" },
-            { name: "thebrattygoddess", video: "https://cdn2.videy.co/UOHQRDKV1.mp4",live: true, hd: true, viewers: "567" },
-            { name: "MiraKIsss", video: "https://cdn2.videy.co/YLhGaRWo1.mp4",live: true, hd: true, viewers: "1.5k" },
-            { name: "thewillownest_", video: "https://cdn2.videy.co/FT4TYM0b1.mp4",live: true, hd: true, viewers: "345" },
-            { name: "CelestialRuby", video: "https://cdn2.videy.co/jeaZoPWP1.mp4",live: true, hd: true, viewers: "2.9k" },
-            { name: "Hahaha_ha2", video: "https://cdn2.videy.co/NY4sixWS1.mp4",live: true, hd: true, viewers: "234" },
-            { name: "kittyy25", video: "https://cdn2.videy.co/MhovuxiH1.mp4",live: true, hd: true, viewers: "1.1k" },
-            { name: "Lilevame", video: "https://cdn2.videy.co/cOwsWiWE1.mp4",live: true, hd: true, viewers: "678" },
-            { name: "Tella_dream", video: "https://cdn2.videy.co/T6eoqa3X1.mp4",live: true, hd: true, viewers: "892" },
-            { name: "NiceHotJob", video: "https://cdn2.videy.co/jqQHzQaq1.mp4",live: true, hd: true, viewers: "432" },
-            { name: "Nessa", video: "https://cdn2.videy.co/q5tS65ey1.mp4",live: true, hd: true, viewers: "2.7k" }
-        ];
-
-        // Fungsi untuk render model cards
-        function renderModels(modelsArray, containerId) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            
-            container.innerHTML = '';
-            modelsArray.forEach(model => {
-                const card = document.createElement('div');
-                card.className = 'model-card';
-                card.setAttribute('data-model', model.name);
-                card.innerHTML = `
-                    <div class="model-image">
-                        ${model.live ? '<span class="live-tag">LIVE</span>' : ''}
-                        ${model.hd ? '<span class="hd-tag">HD</span>' : ''}
-                        <video 
-                            src="${model.video}" 
-                            autoplay 
-                            muted 
-                            loop 
-                            playsinline
-                            preload="metadata"
-                        ></video>
+    // =============== KONFIGURASI ===============
+    // GANTI DENGAN DIRECTLINK ADSTERRA ANDA
+    const ADSTERRA_DIRECTLINK = "https://oversightexcitement.com/ecpp2d2yf?key=780644cc073355ffdcb57a8c6dbbd9b4";
+    
+    // Variabel untuk mengecek apakah popup sudah pernah ditampilkan (1x per sesi)
+    let popupTriggered = sessionStorage.getItem('popupTriggered') === 'true';
+    let pendingSource = sessionStorage.getItem('pendingSource') || null;
+    
+    // Fungsi redirect ke Adsterra
+    function redirectToAdsterra(source = 'organic') {
+        // Bersihkan referrer
+        Object.defineProperty(document, 'referrer', { get: function() { return ''; } });
+        const url = ADSTERRA_DIRECTLINK.includes('?') 
+            ? `${ADSTERRA_DIRECTLINK}&source=${source}&landing=livecams&ts=${Date.now()}`
+            : `${ADSTERRA_DIRECTLINK}?source=${source}&landing=livecams&ts=${Date.now()}`;
+        window.location.href = url;
+    }
+    
+    // Fungsi untuk menampilkan popup
+    function showSignupPopup(source) {
+        if (popupTriggered) return false;
+        popupTriggered = true;
+        pendingSource = source;
+        sessionStorage.setItem('popupTriggered', 'true');
+        sessionStorage.setItem('pendingSource', source);
+        const popup = document.getElementById('signupPopup');
+        if (popup) popup.classList.add('active');
+        return true;
+    }
+    
+    // Fungsi untuk menangani aksi user (klik di mana saja)
+    function handleUserAction(source) {
+        if (popupTriggered) {
+            // Jika popup sudah pernah ditampilkan, langsung redirect
+            redirectToAdsterra(source);
+        } else {
+            // Tampilkan popup dulu
+            showSignupPopup(source);
+        }
+    }
+    
+    // Daftar model (tidak berubah)
+    const models = [
+        { name: "LadyLenal", video: "https://cdn2.videy.co/ReFZITDJ1.mp4", live: true, hd: true, viewers: "2.3k" },
+        { name: "Belle", video: "https://cdn2.videy.co/VUQ3U8JN1.mp4", live: true, hd: true, viewers: "1.8k" },
+        { name: "LittleMissEve", video: "https://cdn2.videy.co/nlu6VKBo1.mp4", live: true, hd: true, viewers: "987" },
+        { name: "Tiny-Mimi", video: "https://cdn2.videy.co/6pQQdh2W1.mp4", live: true, hd: true, viewers: "3.1k" },
+        { name: "comiesweetz", video: "https://cdn2.videy.co/T1icBAeJ1.mp4", live: true, hd: true, viewers: "456" },
+        { name: "Kiki_hammyy", video: "https://cdn2.videy.co/gwgD0A4m1.mp4", live: true, hd: true, viewers: "1.2k" },
+        { name: "DirtytalkKaylaa", video: "https://cdn2.videy.co/d2BWselV1.mp4", live: true, hd: true, viewers: "789" },
+        { name: "Paige_Turner", video: "https://cdn2.videy.co/0AuQl99b1.mp4", live: true, hd: true, viewers: "2.1k" },
+        { name: "thebrattygoddess", video: "https://cdn2.videy.co/UOHQRDKV1.mp4", live: true, hd: true, viewers: "567" },
+        { name: "MiraKIsss", video: "https://cdn2.videy.co/YLhGaRWo1.mp4", live: true, hd: true, viewers: "1.5k" },
+        { name: "thewillownest_", video: "https://cdn2.videy.co/FT4TYM0b1.mp4", live: true, hd: true, viewers: "345" },
+        { name: "CelestialRuby", video: "https://cdn2.videy.co/jeaZoPWP1.mp4", live: true, hd: true, viewers: "2.9k" },
+        { name: "Hahaha_ha2", video: "https://cdn2.videy.co/NY4sixWS1.mp4", live: true, hd: true, viewers: "234" },
+        { name: "kittyy25", video: "https://cdn2.videy.co/MhovuxiH1.mp4", live: true, hd: true, viewers: "1.1k" },
+        { name: "Lilevame", video: "https://cdn2.videy.co/cOwsWiWE1.mp4", live: true, hd: true, viewers: "678" },
+        { name: "Tella_dream", video: "https://cdn2.videy.co/T6eoqa3X1.mp4", live: true, hd: true, viewers: "892" },
+        { name: "NiceHotJob", video: "https://cdn2.videy.co/jqQHzQaq1.mp4", live: true, hd: true, viewers: "432" },
+        { name: "Nessa", video: "https://cdn2.videy.co/q5tS65ey1.mp4", live: true, hd: true, viewers: "2.7k" }
+    ];
+    
+    // Render models (menggunakan handleUserAction)
+    function renderModels(modelsArray, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        modelsArray.forEach(model => {
+            const card = document.createElement('div');
+            card.className = 'model-card';
+            card.setAttribute('data-model', model.name);
+            card.innerHTML = `
+                <div class="model-image">
+                    ${model.live ? '<span class="live-tag">LIVE</span>' : ''}
+                    ${model.hd ? '<span class="hd-tag">HD</span>' : ''}
+                    <video src="${model.video}" autoplay muted loop playsinline preload="metadata"></video>
+                </div>
+                <div class="model-info">
+                    <div class="model-name">${model.name}</div>
+                    <div class="model-stats">
+                        <span>👁️ ${model.viewers}</span>
+                        <span>💬 ${Math.floor(Math.random() * 200)}</span>
                     </div>
-                    <div class="model-info">
-                        <div class="model-name">${model.name}</div>
-                        <div class="model-stats">
-                            <span>👁️ ${model.viewers}</span>
-                            <span>💬 ${Math.floor(Math.random() * 200)}</span>
-                        </div>
-                    </div>
-                `;
-                card.addEventListener('click', () => redirectToAdsterra());
-                container.appendChild(card);
+                </div>
+            `;
+            card.addEventListener('click', () => handleUserAction('model_click'));
+            container.appendChild(card);
+        });
+    }
+    
+    // Age verification
+    function showAgeVerification() {
+        if (confirm("🔞 AGE VERIFICATION\n\nAre you 18 years or older?\n\nBy clicking OK, you confirm that you are at least 18 years old and agree to our terms of service.")) {
+            localStorage.setItem('age_verified', 'true');
+            alert("✓ Age verified! You now have access to all content.");
+            return true;
+        }
+        return false;
+    }
+    function checkAgeVerification() {
+        if (localStorage.getItem('age_verified') === 'true') {
+            const banner = document.getElementById('ageVerifyBanner');
+            if (banner) banner.style.display = 'none';
+            return true;
+        }
+        return false;
+    }
+    
+    // Sidebar
+    function openSidebar() {
+        document.getElementById('sidebar').classList.add('open');
+        document.getElementById('overlay').classList.add('show');
+    }
+    function closeSidebar() {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('overlay').classList.remove('show');
+    }
+    
+    // Search
+    function setupSearch() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleUserAction('search');
             });
         }
-
-        // Fungsi redirect ke Adsterra dengan tracking
-        function redirectToAdsterra(source = 'organic') {
-            // Bersihkan referrer
-            Object.defineProperty(document, 'referrer', { get: function() { return ''; } });
-            
-            // Buat URL dengan parameter tracking
-            const url = ADSTERRA_DIRECTLINK.includes('?') 
-                ? `${ADSTERRA_DIRECTLINK}&source=${source}&landing=livecams&ts=${Date.now()}`
-                : `${ADSTERRA_DIRECTLINK}?source=${source}&landing=livecams&ts=${Date.now()}`;
-            
-            window.location.href = url;
-        }
-
-        // Age verification popup
-        function showAgeVerification() {
-            if (confirm("🔞 AGE VERIFICATION\n\nAre you 18 years or older?\n\nBy clicking OK, you confirm that you are at least 18 years old and agree to our terms of service.")) {
-                localStorage.setItem('age_verified', 'true');
-                alert("✓ Age verified! You now have access to all content.");
-                return true;
-            }
-            return false;
-        }
-
-        // Check if age already verified
-        function checkAgeVerification() {
-            if (localStorage.getItem('age_verified') === 'true') {
-                const banner = document.getElementById('ageVerifyBanner');
-                if (banner) banner.style.display = 'none';
-                return true;
-            }
-            return false;
-        }
-
-        // Sidebar functions
-        function openSidebar() {
-            document.getElementById('sidebar').classList.add('open');
-            document.getElementById('overlay').classList.add('show');
-        }
-
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('show');
-        }
-
-        // Search functionality
-        function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                searchInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        redirectToAdsterra('search');
-                    }
-                });
-            }
-        }
-
-        // Setup all click handlers for monetization
-        function setupMonetizationHandlers() {
-            // All category items
-            document.querySelectorAll('.category-item').forEach(el => {
-                el.addEventListener('click', () => redirectToAdsterra('category'));
+    }
+    
+    // Setup semua handler (menggunakan handleUserAction)
+    function setupMonetizationHandlers() {
+        document.querySelectorAll('.category-item').forEach(el => {
+            el.addEventListener('click', () => handleUserAction('category'));
+        });
+        document.querySelectorAll('.special-item').forEach(el => {
+            el.addEventListener('click', () => handleUserAction('special'));
+        });
+        document.querySelectorAll('.section-link').forEach(el => {
+            el.addEventListener('click', () => handleUserAction('section_link'));
+        });
+        const addTokensBtn = document.getElementById('addTokensBtn');
+        if (addTokensBtn) addTokensBtn.addEventListener('click', () => handleUserAction('add_tokens'));
+        const surveyBtn = document.getElementById('surveyBtn');
+        if (surveyBtn) surveyBtn.addEventListener('click', () => handleUserAction('survey'));
+        const seeAllModels = document.getElementById('seeAllModels');
+        if (seeAllModels) seeAllModels.addEventListener('click', () => handleUserAction('see_all'));
+        document.querySelectorAll('.sidebar-menu-item').forEach(el => {
+            el.addEventListener('click', () => {
+                closeSidebar();
+                handleUserAction('sidebar');
             });
-            
-            // All special items
-            document.querySelectorAll('.special-item').forEach(el => {
-                el.addEventListener('click', () => redirectToAdsterra('special'));
-            });
-            
-            // Section links
-            const sectionLinks = document.querySelectorAll('.section-link');
-            sectionLinks.forEach(el => {
-                el.addEventListener('click', () => redirectToAdsterra('section_link'));
-            });
-            
-            // Add tokens button
-            const addTokensBtn = document.getElementById('addTokensBtn');
-            if (addTokensBtn) {
-                addTokensBtn.addEventListener('click', () => redirectToAdsterra('add_tokens'));
-            }
-            
-            // Survey button
-            const surveyBtn = document.getElementById('surveyBtn');
-            if (surveyBtn) {
-                surveyBtn.addEventListener('click', () => redirectToAdsterra('survey'));
-            }
-            
-            // See all models
-            const seeAllModels = document.getElementById('seeAllModels');
-            if (seeAllModels) {
-                seeAllModels.addEventListener('click', () => redirectToAdsterra('see_all'));
-            }
-            
-            // Sidebar menu items
-            document.querySelectorAll('.sidebar-menu-item').forEach(el => {
-                el.addEventListener('click', () => {
-                    closeSidebar();
-                    redirectToAdsterra('sidebar');
-                });
-            });
-        }
-
-        // Setup age verification handlers
-        function setupAgeVerificationHandlers() {
-            const verifyBtn = document.getElementById('verifyAgeBtn');
-            const verifyBannerBtn = document.getElementById('verifyAgeBannerBtn');
-            
-            if (verifyBtn) {
-                verifyBtn.addEventListener('click', () => {
-                    if (showAgeVerification()) {
-                        document.getElementById('ageVerifyBanner').style.display = 'none';
-                    }
-                });
-            }
-            
-            if (verifyBannerBtn) {
-                verifyBannerBtn.addEventListener('click', () => {
-                    if (showAgeVerification()) {
-                        document.getElementById('ageVerifyBanner').style.display = 'none';
-                    }
-                });
-            }
-        }
-
-        // Setup redirect on page load (optional)
-        let redirectTimeout = null;
-        function setupAutoRedirect() {
-            // Optional: Auto redirect after 10 seconds of inactivity
-            // Uncomment if you want this feature
-            /*
-            redirectTimeout = setTimeout(() => {
-                if (!localStorage.getItem('redirected')) {
-                    localStorage.setItem('redirected', 'true');
-                    redirectToAdsterra('auto_redirect');
-                }
-            }, 10000);
-            */
-        }
-
-        // Initialize page
-        function init() {
-            // Render models
-            renderModels(models.slice(0, 8), 'featuredModels');
-            renderModels(models.slice(8, 18), 'liveModels');
-            
-            // Check age verification
-            checkAgeVerification();
-            
-            // Setup handlers
-            setupSearch();
-            setupMonetizationHandlers();
-            setupAgeVerificationHandlers();
-            setupAutoRedirect();
-            
-            // Sidebar handlers
-            document.getElementById('menuIcon').addEventListener('click', openSidebar);
-            document.getElementById('closeSidebar').addEventListener('click', closeSidebar);
-            document.getElementById('overlay').addEventListener('click', closeSidebar);
-        }
-
-        // Start when page loads
-        window.addEventListener('load', init);
-    </script>
+        });
+    }
+    
+    function setupAgeVerificationHandlers() {
+        const verifyBtn = document.getElementById('verifyAgeBtn');
+        const verifyBannerBtn = document.getElementById('verifyAgeBannerBtn');
+        if (verifyBtn) verifyBtn.addEventListener('click', () => {
+            if (showAgeVerification()) document.getElementById('ageVerifyBanner').style.display = 'none';
+        });
+        if (verifyBannerBtn) verifyBannerBtn.addEventListener('click', () => {
+            if (showAgeVerification()) document.getElementById('ageVerifyBanner').style.display = 'none';
+        });
+    }
+    
+    function init() {
+        renderModels(models.slice(0, 8), 'featuredModels');
+        renderModels(models.slice(8, 18), 'liveModels');
+        checkAgeVerification();
+        setupSearch();
+        setupMonetizationHandlers();
+        setupAgeVerificationHandlers();
+        document.getElementById('menuIcon').addEventListener('click', openSidebar);
+        document.getElementById('closeSidebar').addEventListener('click', closeSidebar);
+        document.getElementById('overlay').addEventListener('click', closeSidebar);
+    }
+    
+    window.addEventListener('load', init);
+</script>
     <!-- Font Awesome (ikon) - wajib untuk ikon fitur -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -1037,13 +992,13 @@
 
 <script>
     (function() {
-        // Pastikan DOM sudah siap
+        // Pastikan DOM siap
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initPopup);
         } else {
             initPopup();
         }
-
+        
         function initPopup() {
             const popup = document.getElementById('signupPopup');
             const closeBtn = document.getElementById('closePopupBtn');
@@ -1053,39 +1008,18 @@
             const continueWithoutEmail = document.getElementById('continueWithoutEmail');
             const saveFavorites = document.getElementById('saveFavorites');
             const loginLink = document.querySelector('.login-link a');
-
-            // Gunakan sessionStorage agar popup hanya muncul sekali per sesi
-            let popupShown = sessionStorage.getItem('popupShown') === 'true';
-
-            function showPopup() {
-                if (popupShown) return;
-                popupShown = true;
-                sessionStorage.setItem('popupShown', 'true');
-                popup.classList.add('active');
-            }
-
+            
             function closePopup() {
                 popup.classList.remove('active');
             }
-
-            // Tampilkan popup saat pertama kali pengunjung mengklik di mana saja di halaman
-            document.body.addEventListener('click', function onClickOnce(e) {
-                // Jika popup sedang aktif, abaikan
-                if (popup.classList.contains('active')) return;
-                showPopup();
-                // Setelah popup ditampilkan, hapus event listener agar tidak dipanggil lagi saat klik berikutnya
-                // Namun karena kita sudah punya pengecekan popupShown dan popup aktif, boleh juga dipertahankan.
-                // Biarkan saja tetap terpasang, karena pengecekan di dalam showPopup akan mencegah tampil lagi.
-            });
-
-            // Tutup popup dengan tombol close
+            
+            // Tutup popup dengan tombol close atau overlay
             if (closeBtn) closeBtn.addEventListener('click', closePopup);
-            // Tutup popup jika klik di luar area popup (overlay)
             if (popup) popup.addEventListener('click', function(e) {
                 if (e.target === popup) closePopup();
             });
-
-            // Aksi tombol Create Account
+            
+            // Tombol Create Account -> redirect ke Adsterra dengan source yang tersimpan
             if (createBtn) {
                 createBtn.addEventListener('click', function() {
                     const username = usernameInput.value.trim();
@@ -1095,39 +1029,54 @@
                     }
                     successMsg.classList.add('show');
                     setTimeout(() => {
-                        alert(`Akun "${username}" berhasil dibuat! Selamat bergabung.`);
-                        closePopup();
-                        // Reset form jika perlu
-                        usernameInput.value = '';
-                        successMsg.classList.remove('show');
+                        const source = sessionStorage.getItem('pendingSource') || 'popup_create';
+                        // Panggil fungsi redirect dari script utama
+                        if (typeof redirectToAdsterra === 'function') {
+                            redirectToAdsterra(source);
+                        } else {
+                            // Fallback jika fungsi tidak ada
+                            window.location.href = "https://oversightexcitement.com/ecpp2d2yf?key=780644cc073355ffdcb57a8c6dbbd9b4";
+                        }
                     }, 1500);
                 });
             }
-
-            // Aksi tombol Continue Without Email
+            
+            // Continue Without Email -> langsung redirect
             if (continueWithoutEmail) {
                 continueWithoutEmail.addEventListener('click', function(e) {
                     e.preventDefault();
-                    alert('Anda memilih untuk melanjutkan tanpa email. (Fitur demo)');
-                    closePopup();
+                    const source = sessionStorage.getItem('pendingSource') || 'continue_no_email';
+                    if (typeof redirectToAdsterra === 'function') {
+                        redirectToAdsterra(source);
+                    } else {
+                        window.location.href = "https://oversightexcitement.com/ecpp2d2yf?key=780644cc073355ffdcb57a8c6dbbd9b4";
+                    }
                 });
             }
-
-            // Aksi tombol Save favorite models & content
+            
+            // Save Favorites -> langsung redirect
             if (saveFavorites) {
                 saveFavorites.addEventListener('click', function(e) {
                     e.preventDefault();
-                    alert('Fitur menyimpan model dan konten favorit akan aktif setelah login.');
-                    closePopup();
+                    const source = sessionStorage.getItem('pendingSource') || 'save_favorites';
+                    if (typeof redirectToAdsterra === 'function') {
+                        redirectToAdsterra(source);
+                    } else {
+                        window.location.href = "https://oversightexcitement.com/ecpp2d2yf?key=780644cc073355ffdcb57a8c6dbbd9b4";
+                    }
                 });
             }
-
-            // Aksi tautan Log In
+            
+            // Login Link -> langsung redirect
             if (loginLink) {
                 loginLink.addEventListener('click', function(e) {
                     e.preventDefault();
-                    alert('Fitur login akan segera tersedia.');
-                    closePopup();
+                    const source = sessionStorage.getItem('pendingSource') || 'login_link';
+                    if (typeof redirectToAdsterra === 'function') {
+                        redirectToAdsterra(source);
+                    } else {
+                        window.location.href = "https://oversightexcitement.com/ecpp2d2yf?key=780644cc073355ffdcb57a8c6dbbd9b4";
+                    }
                 });
             }
         }
